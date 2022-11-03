@@ -1,42 +1,25 @@
-# Nuxt 3 Minimal Starter
+# Nuxt SSR session issue
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+Reproducing the Nuxt SSR session issue on initial rendering on server side 
 
 ## Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# yarn
-yarn install
-
 # npm
 npm install
-
-# pnpm
-pnpm install --shamefully-hoist
 ```
 
-## Development Server
+## Steps to reproduce
 
-Start the development server on http://localhost:3000
+1. Place `aws-export.ts` file directly under `src` folder
+2. Build and Run the application
+3. Open `http://[::]:3000/sign-in`
+4. Login to the application 
+5. Refresh the `dashboard` screen
 
-```bash
-npm run dev
-```
+## Observation
+Observe app redirects to `sign-in` screen (On terminal we can see Amplify error: No Current user and idToken is not available) and redirects back to `dashboard` (because on client side tokens are available so user has valid session)
 
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+https://user-images.githubusercontent.com/78547540/199719014-18920e41-113b-4801-9797-d64045a6aa08.mov
